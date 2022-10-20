@@ -35,7 +35,11 @@ function App() {
           
       <div className="input">
         <input value={toDo} onChange={(e) => setToDo(e.target.value)} type="text" placeholder="🖊️ Add item..." />
-       {toDo && <i onClick={() => setToDos([...toDos, { id: Date.now(), text: toDo, status: false }])} className="fas fa-plus"></i> }
+       {toDo ? <i onClick={() =>{
+        setToDos([...toDos, { id: Date.now(), text: toDo, status: false }]) 
+        setToDo('')
+      } }
+       className="fas fa-plus"></i> : '' }
       </div>
       <div className="todos">
         {toDos.map((obj) => {
@@ -50,6 +54,7 @@ function App() {
                   setToDos(toDos.filter(obj2 => {
                     if (obj2.id === obj.id) {
                       obj2.status = e.target.checked
+                      
                     }
                     return obj2
                   }))
@@ -61,6 +66,7 @@ function App() {
                 <i onClick={() => setToDos(toDos.filter(obj2 => {
                   if (obj2.id === obj.id) {
                     obj2.drop = true
+                    
                   }
                   return obj2
                 }))} className="fas fa-times"></i>
